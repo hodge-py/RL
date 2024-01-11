@@ -27,9 +27,9 @@ class RealTime():
         #write outputs to files eventually
         print(
             f"""
-Mean is {mean}
-Bottom 90 is {bottom90}
-top 10 is {top10}
+Mean is {round(mean,3)} ms
+Bottom 90 is {round(bottom90,3)} ms
+top 10 is {round(top10,3)} ms
             """ 
               )
 
