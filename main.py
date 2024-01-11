@@ -53,10 +53,11 @@ top 10 is {round(top10,3)} ms
 
 
 def looper():
-    for x in range(100):
-        print(x*x)
+    for x in range(10):
+        for y in range(10):
+            print(x*y)
 
 
 x = RealTime()
 
-x.realTimeComplex(stmt='looper()',value=40)
+x.realTimeComplex(stmt='looper()',value=10)
