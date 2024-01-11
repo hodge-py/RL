@@ -20,12 +20,18 @@ class RealTime():
         
         
         x = np.arange(1,value+1)
-        y = np.asarray(result)
+        y = np.asarray(result) * 1000
         mean = np.mean(y)
-        print(mean)
         bottom90 = np.percentile(y,90)
         top10 = np.percentile(y,10)
-
+        #write outputs to files eventually
+        print(
+            f"""
+Mean is {mean}
+Bottom 90 is {bottom90}
+top 10 is {top10}
+            """ 
+              )
 
         m, b = np.polyfit(x, y, 1)
         plt.scatter(x,y,zorder=0)
@@ -53,4 +59,4 @@ def looper():
 
 x = RealTime()
 
-x.realTimeComplex(stmt='looper()',value=500)
+x.realTimeComplex(stmt='looper()',value=40)
