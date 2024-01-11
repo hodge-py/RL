@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import timeit
+import matplotlib.pyplot as plt
 
 
 
@@ -10,9 +11,20 @@ class RealTime():
         print('ehys')
     
 
-    def animateHist(self):
-         pass
+    def realTimeComplex(self,stmt='pass', globals=globals(), number=5):
+         
 
+        result = timeit.repeat(stmt=stmt, globals=globals, number=number)
+
+        x = np.arange(1,number+1)
+        y = np.asarray(result)
+        print(x)
+
+        m, b = np.polyfit(x, y, 1)
+
+        plt.scatter(x,y)
+        plt.plot(x,m*x+b)
+        plt.show()
 
     
     def animateRealTime():
@@ -30,6 +42,4 @@ print(globals())
 
 x = RealTime()
 
-result = timeit.timeit(stmt='looper()', globals=globals(), number=10)
-
-print(result)
+x.realTimeComplex(stmt='looper()')
