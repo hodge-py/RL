@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import timeit
+import timeit, gc
 import matplotlib.pyplot as plt
 
 
@@ -12,12 +12,10 @@ class RealTime():
         print('ehys')
     
 
-    def realTimeComplex(self,stmt='pass', globals=globals(), value=40,number=1):
+    def realTimeComplex(self,stmt='pass', globals=globals(), value=40):
          
         
         result = timeit.repeat(stmt=stmt, globals=globals,repeat=value, number=number)
-
-        
         
         x = np.arange(1,value+1)
         y = np.asarray(result) * 1000
@@ -46,18 +44,18 @@ top 10 is {round(top10,3)} ms
 
 
     
-    def animateRealTime():
+    def complexGuess():
         pass
+        
 
 
 
-
-def looper():
-    for x in range(10):
-        for y in range(10):
+def looper(n):
+    for x in range(n):
+        for y in range(n):
             print(x*y)
 
 
 x = RealTime()
 
-x.realTimeComplex(stmt='looper()',value=10)
+x.realTimeComplex(stmt="looper(10)",value=10)
