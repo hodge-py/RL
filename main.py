@@ -1,29 +1,17 @@
 import numpy as np
 import pandas as pd
-import time as newTime
+import timeit
 
 
 
 class RealTime():
     
-    def animatePlot(self, x, y,time=.1,plotter='scatter',color='black'):
-        #xplace = np.array([])
-        #yplace = np.array([])
-
-
-        for z in range(len(x)):
-            newTime.sleep(1)
-            x = np.arange(0, 10, 0.1)
-            y = np.sin(x)
-            
+    def animatePlot(self):
+        print('ehys')
     
 
-    def animateHist(self, x, time=.1,color='black'):
-        xplace = np.array([])
-        
-        
-        for z in range(len(x)):
-            pass
+    def animateHist(self):
+         pass
 
 
     
@@ -31,17 +19,17 @@ class RealTime():
         pass
 
 
-   
 
-x = np.arange(0, 10, 0.1)
-y = np.sin(x)
+def looper():
+    for x in range(100):
+        print(x)
 
+n=5
 
-time = RealTime()
+print(globals())
 
-time.animatePlot(x,y)
+x = RealTime()
 
+result = timeit.timeit(stmt='looper()', globals=globals(), number=10)
 
-#x = np.random.normal(100, 20, 250)
-
-#time.animateHist(x)
+print(result)
