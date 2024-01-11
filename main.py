@@ -15,7 +15,7 @@ class RealTime():
     def realTimeComplex(self,stmt='pass', globals=globals(), value=40):
          
         
-        result = timeit.repeat(stmt=stmt, globals=globals,repeat=value, number=number)
+        result = timeit.repeat(stmt=stmt, globals=globals,repeat=value)
         
         x = np.arange(1,value+1)
         y = np.asarray(result) * 1000
@@ -43,9 +43,30 @@ top 10 is {round(top10,3)} ms
         plt.show()
 
 
+
     
-    def complexGuess():
-        pass
+    def complexGuess(self,looper,n,v):
+        gc.disable()
+        arr = np.array([])
+        for x in range(n,n+v,10):
+            start = timeit.default_timer()
+            
+            looper(x)
+            end = timeit.default_timer()
+            print(start)
+            print(end)
+            arr = np.append(arr,[end-start])
+
+
+        x = np.arange(1,21)
+        y = arr
+        plt.scatter(x,y)
+        plt.show()
+
+
+        gc.enable()
+        
+
         
 
 
@@ -55,7 +76,8 @@ def looper(n):
         for y in range(n):
             print(x*y)
 
-
 x = RealTime()
 
-x.realTimeComplex(stmt="looper(10)",value=10)
+#x.realTimeComplex(stmt="looper(10)",value=10)
+
+x.complexGuess(looper,10,200)
