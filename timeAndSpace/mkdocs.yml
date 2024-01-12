@@ -1,0 +1,8 @@
+site_name: timeAndSpace
+
+nav:
+  - Home: index.md
+  - Docs: docs.md
+  - About: about.md
+
+theme: readthedocs

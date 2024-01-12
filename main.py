@@ -45,20 +45,20 @@ top 10 is {round(top10,3)} ms
 
 
     
-    def complexGuess(self,looper,n,v):
+    def complexGuess(self,func,testSet):
         gc.disable()
         arr = np.array([])
-        for x in range(n,n+v,10):
+
+        for x in range(0,len(testSet)):
             start = timeit.default_timer()
             
-            looper(x)
+            func(testSet[x])
             end = timeit.default_timer()
-            print(start)
-            print(end)
             arr = np.append(arr,[end-start])
+            print(end-start)
 
 
-        x = np.arange(1,21)
+        x = np.arange(len(testSet))
         y = arr
         plt.scatter(x,y)
         plt.show()
@@ -76,8 +76,16 @@ def looper(n):
         for y in range(n):
             print(x*y)
 
-x = RealTime()
 
+
+testSet = {}
+
+for x in range(0,10):
+    testSet[x] = (x+1)*10
+
+print(testSet)
+real = RealTime()
 #x.realTimeComplex(stmt="looper(10)",value=10)
 
-x.complexGuess(looper,10,200)
+real.complexGuess(looper,testSet)
+
