@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import timeit, gc
 import matplotlib.pyplot as plt
+import random
 
 
 class RealTime():
@@ -69,8 +70,21 @@ top 10 is {round(top10,3)} ms
         plt.plot(x2,y2)
         plt.show()
         gc.enable()
-        
 
+    
+    def treeComplex():
+        pass
+        
+    def generateTestSet(self,amount = 20,type=0):
+        testSet = {}
+        print(amount)
+        for x in range(0,amount):
+            if type == 0:
+                testSet[x] = np.random.randint(0,high=100, size=np.random.randint(50,1000))
+            elif type == 1:
+                testSet[x] = random.randint(1,100)
+
+        return testSet
         
 
 
@@ -90,17 +104,12 @@ def testone(n):
 
 
 
-testSet = {}
-"""
-for x in range(0,10):
-    testSet[x] = (x+1)*10
-"""
 
-for x in range(0,20):
-    testSet[x] = np.random.randint(0,high=100, size=np.random.randint(50,1000))
 
-print(testSet)
 real = RealTime()
 #x.realTimeComplex(stmt="looper(10)",value=10)
 
-real.complexGuess(testone,testSet)
+testSet = real.generateTestSet()
+print(testSet)
+
+real.complexGuess(looper,testSet)
