@@ -1,7 +1,10 @@
 site_name: timeAndSpace
 
+plugins:
+  - mkdocstrings
+
 nav:
-  - Home: index.md
+  - RealTime: index.md
   - Docs: docs.md
   - About: about.md
 
