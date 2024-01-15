@@ -77,12 +77,22 @@ top 10 is {round(top10,3)} ms
     def complexGuess(self,func,testSet):
         """
         Args:
-            file_loc (str): The file location of the spreadsheet
-            print_cols (bool): A flag used to print the columns to the console
-                (default is False)
+            func (Function): Enter the callable name of a function
+            testSet (Dict): Test set to be loop through. An example of the structure is given bellow.
 
         Returns:
             Pyplot: A plot of inputs against time
+            Guess: Guesses what the time complexity by using RMSE of different curves.
+
+        
+        Example: 
+        
+            testSet = {
+                0: [[0,3,2,3]], 
+                1: [[0,3,2,4,3,2,2]], 
+                2: [[343,23,4,234,3]],
+                ... 
+                }
 
         """
 
@@ -97,23 +107,21 @@ top 10 is {round(top10,3)} ms
             arr = np.append(arr,[end-start])
             #loop through testSet and check for input size
             collect = 0
-            print(testSet[x])
             for y in range(len(testSet[x])):
                 if hasattr(testSet[x][y], '__len__'):
                     collect += len(testSet[x][y])
                 else:
                     collect += testSet[x][y]
 
-
             inputSize = np.append(inputSize,collect)
 
 
-
+        
         #x = np.arange(len(testSet)) # order by Runs
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
         x2,y2 = (list(t) for t in zip(*sorted(zip(x, y))))
-
+        print(x2,y2)
         linear = np.array(y2)
         power2 = np.array(y2)
         log = np.array(y2)
@@ -165,13 +173,13 @@ top 10 is {round(top10,3)} ms
             type (int): 0 = array, 1 = int, 2 = string
 
         Returns:
-            dict: 
+            dict: Value is an array. 
 
         Example:
 
             testSet = {
-                0: [[0,3,2,3]]
-                1: [[0,3,2,4,3,2,2]]
+                0: [[0,3,2,3]],
+                1: [[0,3,2,4,3,2,2]],
                 2: [[343,23,4,234,3]]
                 ...
             }
@@ -203,7 +211,7 @@ top 10 is {round(top10,3)} ms
 
 
 
-def looper(n):
+def looper2(n):
     for x in range(n[0]):
         print(x)
 
@@ -214,8 +222,13 @@ def testone(n):
             one = x
 
 def looper(n):
-    for x in range(len(n[0])):
+    today = n[0]
+    stringer = n[1]
+    for x in range(today):
         print(x)
+    
+    for y in stringer:
+        print(y)
 
 
 
@@ -226,8 +239,13 @@ real = RealTime()
 
 testSet = real.generateTestSet(type=0)
 print(testSet)
+testSet1 = {
+            0: [4,"stnr=gwege"],
+            1: [12,"sagsdgg"],
+            2: [3,"esfsfsseafesfsefsef"]
+            }
 
-real.complexGuess(testone,testSet)
+real.complexGuess(looper,testSet1)
 
 
 # doubles each times 
