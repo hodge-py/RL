@@ -95,7 +95,17 @@ top 10 is {round(top10,3)} ms
             func(testSet[x])
             end = timeit.default_timer()
             arr = np.append(arr,[end-start])
-            inputSize = np.append(inputSize,len(testSet[x]))
+            #loop through testSet and check for input size
+            collect = 0
+            print(testSet[x])
+            for y in range(len(testSet[x])):
+                if hasattr(testSet[x][y], '__len__'):
+                    collect += len(testSet[x][y])
+                else:
+                    collect += testSet[x][y]
+
+
+            inputSize = np.append(inputSize,collect)
 
 
 
@@ -157,18 +167,28 @@ top 10 is {round(top10,3)} ms
         Returns:
             dict: 
 
+        Example:
+
+            testSet = {
+                0: [[0,3,2,3]]
+                1: [[0,3,2,4,3,2,2]]
+                2: [[343,23,4,234,3]]
+                ...
+            }
+
+
         """
 
         testSet = {}
         print(amount)
         for x in range(0,amount):
             if type == 0:
-                testSet[x] = np.random.randint(0,high=100, size=np.random.randint(50,1000))
+                testSet[x] = [np.random.randint(0,high=100, size=np.random.randint(50,1000))]
             elif type == 1:
-                testSet[x] = random.randint(1,100)
+                testSet[x] = [random.randint(1,100)]
             elif type == 2:
                 stringer = ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(1,50)))
-                testSet[x] = stringer
+                testSet[x] = [stringer]
 
         return testSet
     
@@ -184,16 +204,18 @@ top 10 is {round(top10,3)} ms
 
 
 def looper(n):
-    for x in range(n):
+    for x in range(n[0]):
         print(x)
 
 def testone(n):
-    for x in range(len(n)):
-        for y in range(len(n)):
+    for x in range(len(n[0])):
+        for y in range(len(n[0])):
             two = y
             one = x
 
-
+def looper(n):
+    for x in range(len(n[0])):
+        print(x)
 
 
 
@@ -209,3 +231,4 @@ real.complexGuess(testone,testSet)
 
 
 # doubles each times 
+
