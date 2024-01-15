@@ -4,6 +4,8 @@ import timeit, gc
 import matplotlib.pyplot as plt
 import random
 import string
+import math
+from sklearn.metrics import mean_squared_error
 
 """A one-line summary of the module or program, terminated by a period.
 
@@ -90,7 +92,6 @@ top 10 is {round(top10,3)} ms
 
         for x in range(0,len(testSet)):
             start = timeit.default_timer()
-            
             func(testSet[x])
             end = timeit.default_timer()
             arr = np.append(arr,[end-start])
@@ -101,12 +102,43 @@ top 10 is {round(top10,3)} ms
         #x = np.arange(len(testSet)) # order by Runs
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
-        x2,y2 = zip(*sorted(zip(x,y),key=lambda x: x[0]))
-        print(x2,y2)
-        plt.scatter(x2,y2)
-        plt.plot(x2,y2)
+        x2,y2 = (list(t) for t in zip(*sorted(zip(x, y))))
+
+        linear = np.array(y2)
+        power2 = np.array(y2)
+        log = np.array(y2)
+        x2 = np.array(x2)
+
+        slope, const = np.polyfit(x2,y2,1)
+        for t in range(len(linear)):
+            linear[t] = slope * x2[t] + const
+
+        slope2, slope, const = np.polyfit(x2,y2,2)
+        for t in range(len(power2)):
+            power2[t] = slope2 * pow(x2[t],2) + slope2 * x2[t] + const
+        
+        slope, const = np.polyfit(x2,np.log(y2),1)
+        for t in range(len(log)):
+            log[t] = slope * x2[t] + const
+
+
+        rms = mean_squared_error(y2, linear, squared=False)
+        rms2 = mean_squared_error(y2, power2, squared=True)
+        print(rms,rms2)
+
+        fig, ax = plt.subplots()
+        ax.scatter(x2,y2, zorder=100) 
+        ax.plot(x2,y2, zorder=100)
+        ax.plot(x2,linear,zorder=4)
+        ax.plot(x2,power2,zorder=3)
         plt.show()
         gc.enable()
+
+
+        if rms > rms2:
+            print("Function is of polynomial time complexity")
+        else:
+            print('Function is of Linear time complexity')
 
         
 
@@ -153,8 +185,7 @@ top 10 is {round(top10,3)} ms
 
 def looper(n):
     for x in range(n):
-        for y in range(n):
-            print(x*y)
+        print(x)
 
 def testone(n):
     for x in range(len(n)):
@@ -175,7 +206,6 @@ testSet = real.generateTestSet(type=0)
 print(testSet)
 
 real.complexGuess(testone,testSet)
-help(real.generateTestSet)
 
 
 # doubles each times 
