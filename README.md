@@ -7,6 +7,12 @@ and increasing input sizes to judge the time complexity.
 
 ```python
 
+def testone(n):
+    for x in range(len(n[0])):
+        for y in range(len(n[0])):
+            two = y
+            one = x
+
 real = RealTime()
 
 testSet = real.generateTestSet(type=0)
