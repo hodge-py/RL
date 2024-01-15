@@ -86,7 +86,7 @@ top 10 is {round(top10,3)} ms
 
         
         Example: 
-        
+
             testSet = {
                 0: [[0,3,2,3]], 
                 1: [[0,3,2,4,3,2,2]], 
@@ -166,7 +166,7 @@ top 10 is {round(top10,3)} ms
 
 
         
-    def generateTestSet(self,amount = 20,type=0):
+    def generateTestSet(self,amount = 30,type=0):
         """
         Args:
             amount (int): defines how many testing sets
@@ -245,7 +245,7 @@ testSet1 = {
             2: [3,"esfsfsseafesfsefsef"]
             }
 
-real.complexGuess(looper,testSet1)
+real.complexGuess(testone,testSet)
 
 
 # doubles each times 
