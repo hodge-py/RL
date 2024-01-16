@@ -1,11 +1,13 @@
 # SpaceTimeComplex
 
-This package was created to evalute functions for time and space complexity. At the moment only time complexity is complete. The function runs an algorithmn over and over with new
+This package was created to evaluate functions for time and space complexity. At the moment only time complexity is complete. The function runs an algorithm over and over with new
 and increasing input sizes to judge the time complexity.
 
 ## Example
 
 ```python
+
+import SpaceTimeComplex
 
 def testone(n):
     for x in range(len(n[0])):
@@ -13,11 +15,17 @@ def testone(n):
             two = y
             one = x
 
-real = RealTime()
+real = SpaceTimeComplex.RealTime() # Create the class
 
-testSet = real.generateTestSet(type=0)
+testSet = real.generateTestSet(type=0) #generate a test set
 
-real.complexGuess(testone,testSet)
+testSet1 = { # Test set example structure. Generated sets will only uses one type
+            0: [4,"stnr=gwege"],
+            1: [12,"sagsdgg"],
+            2: [3,"esfsfsseafesfsefsef"]
+            }
+
+real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
 
 ```
 
