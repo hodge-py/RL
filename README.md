@@ -19,7 +19,7 @@ real = SpaceTimeComplex.RealTime() # Create the class
 
 testSet = real.generateTestSet(type=0) #generate a test set
 
-testSet1 = { # Test set example structure. Generated sets will only uses one type
+testSet1 = { # Test set example structure. Generated sets will only use one data type
             0: [4,"stnr=gwege"],
             1: [12,"sagsdgg"],
             2: [3,"esfsfsseafesfsefsef"]
