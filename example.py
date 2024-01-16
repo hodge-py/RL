@@ -45,7 +45,7 @@ def binary_search(n):
 real = SpaceTimeComplex.RealTime() # Create the class
 #x.realTimeComplex(stmt="looper(10)",value=10)
 
-testSet = real.generateTestSet(amount=100,type=0) #generate a test set
+testSet = real.generateTestSet(amount=200,type=0) #generate a test set
 
 testSet1 = { # Test set example structure
             0: [4,"stnr=gwege"],

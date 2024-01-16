@@ -6,6 +6,8 @@ import random
 import string
 import math
 from sklearn.metrics import mean_squared_error
+import statistics
+from scipy.ndimage import median_filter
 
 
 """A one-line summary of the module or program, terminated by a period.
@@ -116,20 +118,22 @@ top 10 is {round(top10,3)} ms
                     collect += testSet[x][y]
 
             inputSize = np.append(inputSize,collect)
-
-
         
         #x = np.arange(len(testSet)) # order by Runs
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
         x2,y2 = (list(t) for t in zip(*sorted(zip(x, y))))
+        yx = median_filter(y2, size=5)
         
-        linear_fit = self.polyFunc(x2,y2,1)
-        poly_fit = self.polyFunc(x2,y2,2)
-        log_fit = self.polyFunc(np.log(x2),y2,1)
+        linear_fit = self.polyFunc(x2,yx,1)
+        poly_fit = self.polyFunc(x2,yx,2)
+        log_fit = self.polyFunc(np.log(x2),yx,1)
+
+        
+        print(yx)
 
         fig, ax1 = plt.subplots()
-        ax1.scatter(x2,y2, zorder=100)
+        ax1.scatter(x2,yx, zorder=100)
         #ax1.plot(x2,y2, zorder=100)
         ax1.plot(x2,linear_fit)
         ax1.plot(x2,poly_fit)
