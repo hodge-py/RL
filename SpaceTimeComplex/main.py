@@ -136,10 +136,13 @@ top 10 is {round(top10,3)} ms
         print(f"Non-logarithmic function is T(N) = 2.71^({slopeCons[1]})*N^({slopeCons[0]})")
         # 2.71^constant*N^slope
         fig, (ax1,ax2) = plt.subplots(1,2)
-        ax1.scatter(x2,y2, zorder=100)
-
-        ax1.plot(x2,log_fit, c='red')
-        ax2.scatter(graphx2,graphy2)
+        ax2.scatter(x2,y2, zorder=100)
+        ax2.plot(x2,log_fit, c='red')
+        ax2.set(xlabel='ln(N)')
+        ax1.scatter(graphx2,graphy2)
+        ax1.set(xlabel='N',ylabel='Time (ms)')
+        ax1.set_title('Normal')
+        ax2.set_title('Ln(N)')
         plt.show()
         gc.enable()
 
@@ -149,7 +152,7 @@ top 10 is {round(top10,3)} ms
     def polyFunc(self,x,y,degree):
         linear = np.polyfit(x,y,degree)
         trendpoly = np.poly1d(linear)
-        print(trendpoly)
+        print(f"Log equation: {trendpoly}")
         fit_vals = [trendpoly(curr_t) for curr_t in x]
         return fit_vals, linear
     
@@ -157,7 +160,7 @@ top 10 is {round(top10,3)} ms
     def treeComplex():
         pass
         
-    def generateTestSet(self,amount = 50,type=0):
+    def generateTestSet(self,amount = 50,type=0,size=100):
         """
         Args:
             amount (int): defines how many testing sets
@@ -179,18 +182,20 @@ top 10 is {round(top10,3)} ms
         """
 
         testSet = {}
-        print(amount)
+
         for x in range(0,amount):
             if type == 0:
-                testSet[x] = [np.random.randint(0,high=100, size=random.randint(5,100))]
+                testSet[x] = [np.random.randint(0,high=100, size=random.randint(5,size))]
             elif type == 1:
-                testSet[x] = [random.randint(1,100)]
+                testSet[x] = [random.randint(5,size)]
             elif type == 2:
-                stringer = ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(1,50)))
+                stringer = ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(5,size)))
                 testSet[x] = [stringer]
 
         return testSet
     
+
+
 
     def spaceComplex():
         pass
