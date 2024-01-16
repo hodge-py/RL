@@ -98,17 +98,18 @@ top 10 is {round(top10,3)} ms
         """
 
         gc.disable()
+
         arr = np.array([])
         inputSize = np.array([])
 
-        for x in range(0,len(testSet)):
-            start = timeit.default_timer()
+        for x in range(0,len(testSet)): #loop through every test set
+            start = timeit.default_timer() #start the timer
             func(testSet[x])
             end = timeit.default_timer()
             arr = np.append(arr,[end-start])
             #loop through testSet and check for input size
             collect = 0
-            for y in range(len(testSet[x])):
+            for y in range(len(testSet[x])): #retrieve the value from test set
                 if hasattr(testSet[x][y], '__len__'):
                     collect += len(testSet[x][y])
                 else:
@@ -128,23 +129,22 @@ top 10 is {round(top10,3)} ms
         log = np.array(y2)
         x2 = np.array(x2)
 
-        slope, const = np.polyfit(x2,y2,1)
+        slope, const = np.polyfit(x2,y2,1) #linear slope calculation
         for t in range(len(linear)):
             linear[t] = slope * x2[t] + const
 
-        slope2, slope, const = np.polyfit(x2,y2,2)
+        slope2, slope, const = np.polyfit(x2,y2,2) #polynomial Slope Calculation
         for t in range(len(power2)):
-            power2[t] = slope2 * pow(x2[t],2) + slope2 * x2[t] + const
+            power2[t] = slope2 * pow(x2[t],2) + slope * x2[t] + const
         
-        slope, const = np.polyfit(np.log(x2),y2,1)
+        slope, const = np.polyfit(np.log(x2),y2,1) #log slope calculation
         for t in range(len(log)):
             log[t] = slope * np.log(x2[t]) + const
 
-        print(log,slope,const)
         rms = mean_squared_error(y2, linear, squared=False)
         rms2 = mean_squared_error(y2, power2, squared=True)
         rms3 = mean_squared_error(y2, log, squared=False)
-        print(rms,rms2,rms3)
+
 
         fig, ax = plt.subplots()
         ax.scatter(x2,y2, zorder=100) 
@@ -155,9 +155,11 @@ top 10 is {round(top10,3)} ms
         plt.show()
         gc.enable()
 
-
+        print(rms,rms2,power2)
         if rms > rms2:
             print("Function is of polynomial time complexity")
+        elif rms > rms3 and rms2 > rms3:
+            print("Function is of logarithmic time complexity")
         else:
             print('Function is of Linear time complexity')
         

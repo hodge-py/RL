@@ -21,6 +21,8 @@ def looper(n):
     for y in stringer:
         print(y)
 
+def constantFunc(n):
+    today = n[0]
 
 real = SpaceTimeComplex.RealTime() # Create the class
 #x.realTimeComplex(stmt="looper(10)",value=10)
@@ -33,6 +35,6 @@ testSet1 = { # Test set example structure
             2: [3,"esfsfsseafesfsefsef"]
             }
 
-real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
+real.complexGuess(constantFunc,testSet) #guess the complexity of a function. Returns the guess and a plot
 
 
