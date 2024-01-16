@@ -7,6 +7,7 @@ import string
 import math
 from sklearn.metrics import mean_squared_error
 
+
 """A one-line summary of the module or program, terminated by a period.
 
 Leave one blank line.  The rest of this docstring should contain an
@@ -20,7 +21,7 @@ Typical usage example:
 """
 
 class RealTime():
-
+    
     """Summary of class here.
 
     
@@ -135,20 +136,22 @@ top 10 is {round(top10,3)} ms
         for t in range(len(power2)):
             power2[t] = slope2 * pow(x2[t],2) + slope2 * x2[t] + const
         
-        slope, const = np.polyfit(x2,np.log(y2),1)
+        slope, const = np.polyfit(np.log(x2),y2,1)
         for t in range(len(log)):
-            log[t] = slope * x2[t] + const
+            log[t] = slope * np.log(x2[t]) + const
 
-
+        print(log,slope,const)
         rms = mean_squared_error(y2, linear, squared=False)
         rms2 = mean_squared_error(y2, power2, squared=True)
-        print(rms,rms2)
+        rms3 = mean_squared_error(y2, log, squared=False)
+        print(rms,rms2,rms3)
 
         fig, ax = plt.subplots()
         ax.scatter(x2,y2, zorder=100) 
         ax.plot(x2,y2, zorder=100)
         ax.plot(x2,linear,zorder=4)
         ax.plot(x2,power2,zorder=3)
+        ax.plot(x2,log,zorder=2)
         plt.show()
         gc.enable()
 
@@ -157,7 +160,6 @@ top 10 is {round(top10,3)} ms
             print("Function is of polynomial time complexity")
         else:
             print('Function is of Linear time complexity')
-
         
 
     
@@ -166,7 +168,7 @@ top 10 is {round(top10,3)} ms
 
 
         
-    def generateTestSet(self,amount = 30,type=0):
+    def generateTestSet(self,amount = 50,type=0):
         """
         Args:
             amount (int): defines how many testing sets
