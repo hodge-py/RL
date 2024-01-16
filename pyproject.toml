@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "SpaceTimeComplex"
+version = "1.0.0.0.0.0.1"
+authors = [
+  { name="Karson Hodge", email="khodge1@hotmail.com" },
+]
+description = "Big O calculations for Space and Time Complexity"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Free for non-commercial use",
+    "Operating System :: OS Independent",
+]
+dependencies = ['numpy', 'pandas', 'sklearn-learn']
+
+[project.urls]
+Homepage = "https://github.com/hodge-py/SpaceTimeComplex"
+Issues = "https://github.com/hodge-py/SpaceTimeComplex/issues"
