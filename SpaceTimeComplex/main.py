@@ -123,52 +123,32 @@ top 10 is {round(top10,3)} ms
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
         x2,y2 = (list(t) for t in zip(*sorted(zip(x, y))))
-        print(x2,y2)
-        linear = np.array(y2)
-        power2 = np.array(y2)
-        log = np.array(y2)
-        x2 = np.array(x2)
-
-        slope, const = np.polyfit(x2,y2,1) #linear slope calculation
-        for t in range(len(linear)):
-            linear[t] = slope * x2[t] + const
-
-        slope2, slope, const = np.polyfit(x2,y2,2) #polynomial Slope Calculation
-        for t in range(len(power2)):
-            power2[t] = slope2 * pow(x2[t],2) + slope * x2[t] + const
         
-        slope, const = np.polyfit(np.log(x2),y2,1) #log slope calculation
-        for t in range(len(log)):
-            log[t] = slope * np.log(x2[t]) + const
+        linear_fit = self.polyFunc(x2,y2,1)
+        poly_fit = self.polyFunc(x2,y2,2)
+        log_fit = self.polyFunc(np.log(x2),y2,1)
 
-        rms = mean_squared_error(y2, linear, squared=False)
-        rms2 = mean_squared_error(y2, power2, squared=True)
-        rms3 = mean_squared_error(y2, log, squared=False)
-
-
-        fig, ax = plt.subplots()
-        ax.scatter(x2,y2, zorder=100) 
-        ax.plot(x2,y2, zorder=100)
-        ax.plot(x2,linear,zorder=4)
-        ax.plot(x2,power2,zorder=3)
-        ax.plot(x2,log,zorder=2)
+        fig, ax1 = plt.subplots()
+        ax1.scatter(x2,y2, zorder=100)
+        #ax1.plot(x2,y2, zorder=100)
+        ax1.plot(x2,linear_fit)
+        ax1.plot(x2,poly_fit)
+        ax1.plot(x2,log_fit, c='red')
         plt.show()
         gc.enable()
 
-        print(rms,rms2,power2)
-        if rms > rms2:
-            print("Function is of polynomial time complexity")
-        elif rms > rms3 and rms2 > rms3:
-            print("Function is of logarithmic time complexity")
-        else:
-            print('Function is of Linear time complexity')
         
 
     
+    def polyFunc(self,x,y,degree):
+        linear = np.polyfit(x,y,degree)
+        trendpoly = np.poly1d(linear)
+        fit_vals = [trendpoly(curr_t) for curr_t in x]
+        return fit_vals
+    
+
     def treeComplex():
         pass
-
-
         
     def generateTestSet(self,amount = 50,type=0):
         """
@@ -195,7 +175,7 @@ top 10 is {round(top10,3)} ms
         print(amount)
         for x in range(0,amount):
             if type == 0:
-                testSet[x] = [np.random.randint(0,high=100, size=np.random.randint(50,1000))]
+                testSet[x] = [np.sort(np.random.randint(0,high=10000, size=np.random.randint(1,10000))),random.randint(0,100)]
             elif type == 1:
                 testSet[x] = [random.randint(1,100)]
             elif type == 2:

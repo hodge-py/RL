@@ -21,13 +21,31 @@ def looper(n):
     for y in stringer:
         print(y)
 
-def constantFunc(n):
-    today = n[0]
+def logfunc(n):
+    for x in range(0,len(n[0]),20):
+        print(x)
+
+
+def binary_search(n):
+  array = n[0]
+  target = n[1]
+  low = 0
+  high = len(array) - 1
+  while low <= high:
+    mid = (low + high) // 2 # integer division
+    element = array[mid]
+    if element == target:
+      return mid
+    elif element < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+  return -1
 
 real = SpaceTimeComplex.RealTime() # Create the class
 #x.realTimeComplex(stmt="looper(10)",value=10)
 
-testSet = real.generateTestSet(type=0) #generate a test set
+testSet = real.generateTestSet(amount=100,type=0) #generate a test set
 
 testSet1 = { # Test set example structure
             0: [4,"stnr=gwege"],
@@ -35,6 +53,6 @@ testSet1 = { # Test set example structure
             2: [3,"esfsfsseafesfsefsef"]
             }
 
-real.complexGuess(constantFunc,testSet) #guess the complexity of a function. Returns the guess and a plot
+real.complexGuess(binary_search,testSet) #guess the complexity of a function. Returns the guess and a plot
 
 
