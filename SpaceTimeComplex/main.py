@@ -7,7 +7,6 @@ import string
 import math
 from sklearn.metrics import mean_squared_error
 import statistics
-from scipy.ndimage import median_filter
 
 
 """A one-line summary of the module or program, terminated by a period.
@@ -123,21 +122,24 @@ top 10 is {round(top10,3)} ms
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
         x2,y2 = (list(t) for t in zip(*sorted(zip(x, y))))
-        yx = median_filter(y2, size=5)
-        
-        linear_fit = self.polyFunc(x2,yx,1)
-        poly_fit = self.polyFunc(x2,yx,2)
-        log_fit = self.polyFunc(np.log(x2),yx,1)
+        graphx2 = x2
+        graphy2 = y2
+        print(f"x-values: {graphx2}")
+        print(f"y-values: {graphy2}")
 
-        
-        print(yx)
+        x2 = np.log(x2)
+        y2 = np.log(y2)
 
-        fig, ax1 = plt.subplots()
-        ax1.scatter(x2,yx, zorder=100)
-        #ax1.plot(x2,y2, zorder=100)
-        ax1.plot(x2,linear_fit)
-        ax1.plot(x2,poly_fit)
+        log_fit, slopeCons = self.polyFunc(x2,y2,1)
+
+        print(f"Algorithmn is of O(n^{slopeCons[0]}) time")
+        print(f"Non-logarithmic function is T(N) = 2.71^({slopeCons[1]})*N^({slopeCons[0]})")
+        # 2.71^constant*N^slope
+        fig, (ax1,ax2) = plt.subplots(1,2)
+        ax1.scatter(x2,y2, zorder=100)
+
         ax1.plot(x2,log_fit, c='red')
+        ax2.scatter(graphx2,graphy2)
         plt.show()
         gc.enable()
 
@@ -147,8 +149,9 @@ top 10 is {round(top10,3)} ms
     def polyFunc(self,x,y,degree):
         linear = np.polyfit(x,y,degree)
         trendpoly = np.poly1d(linear)
+        print(trendpoly)
         fit_vals = [trendpoly(curr_t) for curr_t in x]
-        return fit_vals
+        return fit_vals, linear
     
 
     def treeComplex():
@@ -179,7 +182,7 @@ top 10 is {round(top10,3)} ms
         print(amount)
         for x in range(0,amount):
             if type == 0:
-                testSet[x] = [np.sort(np.random.randint(0,high=10000, size=np.random.randint(1,10000))),random.randint(0,100)]
+                testSet[x] = [np.random.randint(0,high=100, size=random.randint(5,100))]
             elif type == 1:
                 testSet[x] = [random.randint(1,100)]
             elif type == 2:

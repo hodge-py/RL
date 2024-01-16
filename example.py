@@ -9,8 +9,9 @@ def looper2(n):
 def testone(n):
     for x in range(len(n[0])):
         for y in range(len(n[0])):
-            two = y
-            one = x
+            for z in range(len(n[0])):
+              two = y
+              one = x
 
 def looper(n):
     today = n[0]
@@ -45,7 +46,7 @@ def binary_search(n):
 real = SpaceTimeComplex.RealTime() # Create the class
 #x.realTimeComplex(stmt="looper(10)",value=10)
 
-testSet = real.generateTestSet(amount=200,type=0) #generate a test set
+testSet = real.generateTestSet(amount=20,type=0) #generate a test set
 
 testSet1 = { # Test set example structure
             0: [4,"stnr=gwege"],
@@ -53,6 +54,6 @@ testSet1 = { # Test set example structure
             2: [3,"esfsfsseafesfsefsef"]
             }
 
-real.complexGuess(binary_search,testSet) #guess the complexity of a function. Returns the guess and a plot
+real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
 
 
