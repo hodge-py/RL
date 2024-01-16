@@ -32,3 +32,9 @@ real.complexGuess(testone,testSet) #guess the complexity of a function. Returns 
 ![Figure_1](https://github.com/hodge-py/RealTime_Analysis/assets/105604814/fef612f2-ff1b-411a-b9b1-7d9ae8cd0af2)
 
 ![Screenshot 2024-01-15 020628](https://github.com/hodge-py/RealTime_Analysis/assets/105604814/b0b113f5-466d-4d21-9551-d3fd17e8a9bf)
+
+## Jupyter Lab
+
+The package can also be used in jupyter notebooks.
+
+![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/61f63cb6-17d6-4cbd-89cf-f013b152c0c4)
