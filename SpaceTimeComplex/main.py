@@ -144,7 +144,8 @@ top 10 is {round(top10,3)} ms
         print(f"Algorithmn is of O(n^{slopeCons[0]}) time")
         print(f"Non-logarithmic function is T(N) = 2.71^({slopeCons[1]})*N^({slopeCons[0]})")
         # 2.71^constant*N^slope
-        fig, (ax1,ax2) = plt.subplots(1,2)
+
+        fig, (ax1,ax2,ax3) = plt.subplots(1,3)
         ax2.scatter(x2,y2, zorder=100)
         ax2.plot(x2,log_fit, c='red')
         ax2.set(xlabel='ln(N)')
@@ -152,6 +153,8 @@ top 10 is {round(top10,3)} ms
         ax1.set(xlabel='N',ylabel='Time (ms)')
         ax1.set_title('Normal')
         ax2.set_title('Ln(N)')
+        ax3.plot(graphx2,np.power(graphx2,slopeCons[0]))
+        ax3.set_title('Input')
         plt.show()
         gc.enable()
 
