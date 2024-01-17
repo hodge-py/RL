@@ -7,6 +7,7 @@ import string
 import math
 from sklearn.metrics import mean_squared_error
 import statistics
+from pprint import pprint
 
 
 """A one-line summary of the module or program, terminated by a period.
@@ -32,16 +33,10 @@ class RealTime():
 
     """
 
-    def animatePlot(self):
-        print('ehys')
-    
-
     def realTimeComplex(self,testSet,func):
         """
         Args:
-            table_handle: An open smalltable.Table instance.
-            keys: A sequence of strings representing the key of each table row to fetch.  String keys will be UTF-8 encoded.
-            require_all_keys: If True only rows with values set for all keys will be returned.
+            
 
         """
 
@@ -117,8 +112,9 @@ top 10 is {round(top10,3)} ms
         inputSize = np.array([])
 
         for x in range(0,len(testSet)): #loop through every test set
+            valueList = testSet[x]
             start = timeit.default_timer() #start the timer
-            func(testSet[x])
+            func(*valueList)
             end = timeit.default_timer()
             arr = np.append(arr,[end-start])
             #loop through testSet and check for input size
@@ -137,8 +133,8 @@ top 10 is {round(top10,3)} ms
         x2,y2 = (list(t) for t in zip(*sorted(zip(x, y))))
         graphx2 = x2
         graphy2 = y2
-        print(f"x-values: {graphx2}")
-        print(f"y-values: {graphy2}")
+        pprint(f"x-values: {graphx2}")
+        pprint(f"y-values: {graphy2}")
 
         x2 = np.log(x2)
         y2 = np.log(y2)
@@ -174,7 +170,7 @@ top 10 is {round(top10,3)} ms
 
 
         
-    def generateTestSet(self,amount = 50,type=0,size=100):
+    def generateTestSet(self,amount = 50,type=0,size2=100):
         """
         Args:
             amount (int): defines how many testing sets
@@ -199,25 +195,15 @@ top 10 is {round(top10,3)} ms
 
         for x in range(0,amount):
             if type == 0:
-                testSet += [np.random.randint(0,high=100, size=random.randint(5,size))]
+                testSet += [[np.random.randint(0,high=100, size=random.randint(5,size2))]]
             elif type == 1:
-                testSet += [random.randint(5,size)]
+                testSet += [[random.randint(5,size2)]]
             elif type == 2:
-                stringer = ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(5,size)))
-                testSet += [stringer]
+                stringer = ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(5,size2)))
+                testSet += [[stringer]]
 
         return testSet
     
-
-
-
-    def spaceComplex():
-        pass
-
-
-    def combinedComplex():
-        pass
-        
 
 
 
