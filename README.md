@@ -9,32 +9,37 @@ and increasing input sizes to judge the time complexity.
 
 import SpaceTimeComplex
 
+def looper(today,stringer):
+    for x in range(today):
+        print(x)
+    
+    for y in stringer:
+        print(y)
+
 def testone(n):
-    for x in range(len(n[0])):
-        for y in range(len(n[0])):
-            two = y
-            one = x
+    for x in range(len(n)):
+        for y in range(len(n)):
+            for z in range(len(n)):
+              two = y
+              one = x
+              three = z
+
 
 real = SpaceTimeComplex.RealTime() # Create the class
 
-testSet = real.generateTestSet(type=0) #generate a test set
+testSet = real.generateTestSet() #generate a test set
 
-testSet1 = { # Test set example structure. Generated sets will only use one data type
-            0: [4,"stnr=gwege"],
-            1: [12,"sagsdgg"],
-            2: [3,"esfsfsseafesfsefsef"]
-            }
+testSet1 = [[4,"stnr=gwege"], [12,"sagsdgg"], [3,"esfsfsseafesfsefsef"], [45,"stnrefgseege"], [17,"sagwetjtwfwe"], [34,"esfsfssem"],[41,"stn"], [53,"sakhhksdgg"], [24,"esjfjkkfsefsef"], [70,"stnwete"], [7,"sagwefwewsdfsdffwe"], ] 
+# format of array. 2d array with each test set inside. You can make your own or just generate one with generateTestSet(). Each inner array is the postional arguements for the inserted argument.
 
-real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
+real.complexGuess(looper,testSet1) #guess the complexity of a function. Returns the guess and a plot
 
 ```
 
-![Figure_1](https://github.com/hodge-py/RealTime_Analysis/assets/105604814/fef612f2-ff1b-411a-b9b1-7d9ae8cd0af2)
+![Figure_1](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/e41467cf-aa18-4bbc-982a-869dc58ad584)
 
-![Screenshot 2024-01-15 020628](https://github.com/hodge-py/RealTime_Analysis/assets/105604814/b0b113f5-466d-4d21-9551-d3fd17e8a9bf)
+![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/a0ae7537-2a14-44f2-a015-97b2abf2252e)
 
 ## Jupyter Lab
 
 The package can also be used in jupyter notebooks.
-
-![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/61f63cb6-17d6-4cbd-89cf-f013b152c0c4)
