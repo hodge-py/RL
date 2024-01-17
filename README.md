@@ -36,9 +36,9 @@ real.complexGuess(looper,testSet1) #guess the complexity of a function. Returns 
 
 ```
 
-![Figure_1](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/e41467cf-aa18-4bbc-982a-869dc58ad584)
+![Figure_1](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/bfe0246f-ac30-418b-b171-48bb1e3093ce)
 
-![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/a0ae7537-2a14-44f2-a015-97b2abf2252e)
+![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/0521a2d7-9254-47f2-8b6f-d408038e33b1)
 
 ## Jupyter Lab
 
