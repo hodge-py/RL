@@ -41,6 +41,10 @@ real.complexGuess(looper,testSet1) #guess the complexity of a function. Returns 
 
 ![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/0521a2d7-9254-47f2-8b6f-d408038e33b1)
 
+## Example of the non-log functions graphed. Green $O(n)$ and red $O(n^2)$
+
+![grapher](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/0c784075-e11a-4c7c-9721-7e534353cba9)
+
 ## Jupyter Lab
 
 The package can also be used in jupyter notebooks.
