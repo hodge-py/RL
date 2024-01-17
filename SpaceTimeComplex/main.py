@@ -112,16 +112,13 @@ top 10 is {round(top10,3)} ms
 
         arr = np.array([])
         inputSize = np.array([])
-        memory = np.array([])
+
 
         for x in range(0,len(testSet)): #loop through every test set
             valueList = testSet[x]
             start = timeit.default_timer() #start the timer
-            tracemalloc.start()
             func(*valueList)
             end = timeit.default_timer()
-            memory = np.append(memory,tracemalloc.get_traced_memory())
-            tracemalloc.stop()
             arr = np.append(arr,[end-start])
             #loop through testSet and check for input size
             collect = 0
@@ -133,8 +130,7 @@ top 10 is {round(top10,3)} ms
 
             inputSize = np.append(inputSize,collect)
         
-        print(memory)
-        print(max(memory))
+
         #x = np.arange(len(testSet)) # order by Runs
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
