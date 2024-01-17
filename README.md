@@ -1,6 +1,8 @@
 # SpaceTimeComplex
 
 This package was created to evaluate functions for time and space complexity. At the moment only time complexity is complete. The function runs an algorithm over and over with randomized input sizes to judge the time complexity.
+PYPI:
+<https://pypi.org/project/SpaceTimeComplex/>
 
 ## Example
 
