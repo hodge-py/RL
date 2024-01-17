@@ -36,7 +36,7 @@ class RealTime():
         print('ehys')
     
 
-    def realTimeComplex(self,stmt='pass', globals=globals(), value=40):
+    def realTimeComplex(self,testSet,func):
         """
         Args:
             table_handle: An open smalltable.Table instance.
@@ -44,9 +44,22 @@ class RealTime():
             require_all_keys: If True only rows with values set for all keys will be returned.
 
         """
-         
-        
-        result = timeit.repeat(stmt=stmt, globals=globals,repeat=value)
+
+
+        for x in range(0,len(testSet)): #loop through every test set
+            start = timeit.default_timer() #start the timer
+            func(testSet[x])
+            end = timeit.default_timer()
+            arr = np.append(arr,[end-start])
+            #loop through testSet and check for input size
+            collect = 0
+        for y in range(len(testSet[x])): #retrieve the value from test set
+            if hasattr(testSet[x][y], '__len__'):
+                collect += len(testSet[x][y])
+            else:
+                collect += testSet[x][y]
+
+            inputSize = np.append(inputSize,collect)
         
         x = np.arange(1,value+1)
         y = np.asarray(result) * 1000
@@ -157,8 +170,9 @@ top 10 is {round(top10,3)} ms
         return fit_vals, linear
     
 
-    def treeComplex():
-        pass
+
+
+
         
     def generateTestSet(self,amount = 50,type=0,size=100):
         """
@@ -181,16 +195,16 @@ top 10 is {round(top10,3)} ms
 
         """
 
-        testSet = {}
+        testSet = []
 
         for x in range(0,amount):
             if type == 0:
-                testSet[x] = [np.random.randint(0,high=100, size=random.randint(5,size))]
+                testSet += [np.random.randint(0,high=100, size=random.randint(5,size))]
             elif type == 1:
-                testSet[x] = [random.randint(5,size)]
+                testSet += [random.randint(5,size)]
             elif type == 2:
                 stringer = ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(5,size)))
-                testSet[x] = [stringer]
+                testSet += [stringer]
 
         return testSet
     
