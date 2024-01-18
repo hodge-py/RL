@@ -11,6 +11,7 @@ rlmach/
 rlmach/Scripts/
 share/
 
+Obsolete/
 # Distribution / packaging
 .Python
 build/

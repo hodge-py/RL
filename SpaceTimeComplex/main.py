@@ -33,7 +33,7 @@ class RealTime():
 
     """
 
-    def realTimeComplex(self,testSet,func):
+    def bestWorst(self,func,testSet):
         """
         Args:
             
@@ -170,9 +170,6 @@ top 10 is {round(top10,3)} ms
         return fit_vals, linear
     
 
-
-
-
         
     def generateTestSet(self,amount = 50,type=0,size2=100):
         """
@@ -208,7 +205,3 @@ top 10 is {round(top10,3)} ms
 
         return testSet
     
-
-    def algoQuestions():
-        pass
-
