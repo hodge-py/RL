@@ -8,7 +8,6 @@ import math
 from sklearn.metrics import mean_squared_error
 import statistics
 from pprint import pprint
-import tracemalloc
 
 
 """A one-line summary of the module or program, terminated by a period.
@@ -113,7 +112,6 @@ top 10 is {round(top10,3)} ms
         arr = np.array([])
         inputSize = np.array([])
 
-
         for x in range(0,len(testSet)): #loop through every test set
             valueList = testSet[x]
             start = timeit.default_timer() #start the timer
@@ -130,7 +128,6 @@ top 10 is {round(top10,3)} ms
 
             inputSize = np.append(inputSize,collect)
         
-
         #x = np.arange(len(testSet)) # order by Runs
         x = inputSize # order by input size
         y = np.multiply(arr,1000)
