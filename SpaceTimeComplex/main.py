@@ -10,16 +10,10 @@ import statistics
 from pprint import pprint
 
 
-"""A one-line summary of the module or program, terminated by a period.
-
-Leave one blank line.  The rest of this docstring should contain an
-overall description of the module or program.  Optionally, it may also
-contain a brief description of exported classes and functions and/or usage
-examples.
-
-Typical usage example:
+"""
 
   realTime = RealTime()
+
 """
 
 class RealTime():
@@ -35,9 +29,15 @@ class RealTime():
 
     def bestWorst(self,func,testSet):
         """
+        
         Args:
-            
+            func (callable): Function that is callable
+            testSet (array): 2d array containing every test set
 
+        Returns:
+            print: Prints to the console the results
+            Pyplot: Shows a plot with the worst, best and average run times
+            
         """
         
 

@@ -9,7 +9,7 @@ setup(
   packages = ['TimeComplex'],   # Chose the same as "name"
   version = '0.0.4',      # Start with a small number and increase it with every change you make
   license='Copyright',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = 'Big O calculations for Space And Time',   # Give a short description about your library
+  description = 'Big O calculations for Time',   # Give a short description about your library
   author = 'Karson Hodge',                   # Type in your name
   author_email = 'khodge1@hotmail.com',      # Type in your E-Mail
   url = 'https://github.com/hodge-py/TimeComplex',   # Provide either the link to your github or to your website
