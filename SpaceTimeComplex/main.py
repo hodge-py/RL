@@ -78,6 +78,7 @@ class RealTime():
         top10 = np.mean(arrlow)
         #write outputs to files eventually
         # find the standard deviation and add it to the mean. Mean in this case being the N^value found from the logarithmic fit
+        # used the original array to find the mean and then apply std deviation.
         log_fit, slopeCons = self.polyFunc(x,y,1)
         print((((mean-top10)/top10)+1))
 
