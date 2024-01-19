@@ -70,7 +70,7 @@ class RealTime():
         y = np.multiply(arr,1000)
         print(y)
         std = np.std(y)
-        print(std)
+        print(2*std)
         # write outputs to files eventually
         # find the standard deviation and add it to the mean. Mean in this case being the N^value found from the logarithmic fit
         # used the original array to find the mean and then apply std deviation.
