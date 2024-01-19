@@ -27,7 +27,7 @@ class RealTime():
 
     """
 
-    def bestWorst(self,func,testSet,loops=10):
+    def bestWorst(self,func,testSet,loop=1000):
         """
         
         Args:
@@ -43,17 +43,15 @@ class RealTime():
         arr = np.array([])
         inputSize = np.array([])
         arrtmp = np.array([])
-        arrlow = np.array([])
-        arrmean = np.array([])
         
         for x in range(0,len(testSet)): #loop through every test set
-            for z in range(loops):
+            for y in range(loop):
                 start = timeit.default_timer() #start the timer
                 func(testSet[x])
                 end = timeit.default_timer()
                 arrtmp = np.append(arrtmp,(end-start))
-                print(arrtmp)
-                #loop through testSet and check for input size
+
+            #loop through testSet and check for input size
                 
             collect = 0
             for y in range(len(testSet[x])): #retrieve the value from test set
@@ -63,34 +61,25 @@ class RealTime():
                     collect += testSet[x][y]
 
             inputSize = np.append(inputSize,collect)
-            maxi = np.max(arrtmp)
-            lower = np.min(arrtmp)
-            meaner = np.mean(arrtmp)
-            arr = np.append(arr,maxi)
-            arrlow = np.append(arrlow,lower)
-            arrmean = np.append(arrmean,meaner)
+            arr = np.append(arr,arrtmp)
             arrtmp = np.array([])
+
+            break
         
         x = inputSize
-        y = np.asarray(arr) * 1000
-        mean = meaner
-        bottom90 = np.mean(arr)
-        top10 = np.mean(arrlow)
-        #write outputs to files eventually
+        y = np.multiply(arr,1000)
+        print(y)
+        std = np.std(y)
+        print(std)
+        # write outputs to files eventually
         # find the standard deviation and add it to the mean. Mean in this case being the N^value found from the logarithmic fit
         # used the original array to find the mean and then apply std deviation.
-        log_fit, slopeCons = self.polyFunc(x,y,1)
-        print((((mean-top10)/top10)+1))
+        u, counts = np.unique(y,return_counts=True)
 
         fig, ax = plt.subplots()
         ax.grid(zorder=-1.0)
-        ax.scatter(x,y=arrmean, zorder=4)
-        ax.scatter(x,y=arr,c='red')
-        ax.scatter(x,y=arrlow,c='purple')
-        ax.axhline(y=mean)
-        ax.axhline(y=bottom90)
-        ax.axhline(y=top10)
-        ax.set(xlabel="Inputs",ylabel='Time (ms)')
+        ax.hist(y,bins=50)
+
         plt.show()
 
 
@@ -162,6 +151,9 @@ class RealTime():
         ax2.set_title('Ln(N)')
         ax3.plot(graphx2,np.power(graphx2,slopeCons[0]))
         ax3.set_title('Input')
+        ax1.grid(zorder=-1.0)
+        ax2.grid(zorder=-1.0)
+        ax3.grid(zorder=-1.0)
         plt.show()
         gc.enable()
 
