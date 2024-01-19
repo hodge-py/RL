@@ -286,7 +286,14 @@
 <span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
-<span class="normal">196</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">RealTime</span><span class="p">():</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">RealTime</span><span class="p">():</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary of class here.</span>
 
@@ -297,7 +304,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">bestWorst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">testSet</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">bestWorst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">testSet</span><span class="p">,</span><span class="n">loops</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Args:</span>
@@ -310,25 +317,32 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">inputSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">arrtmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">)):</span> <span class="c1">#loop through every test set</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="c1">#start the timer</span>
-            <span class="n">func</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
-            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,[</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">])</span>
-            <span class="c1">#loop through testSet and check for input size</span>
+            <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="p">):</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="c1">#start the timer</span>
+                <span class="n">func</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+                <span class="n">arrtmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arrtmp</span><span class="p">,[</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">])</span>
+                <span class="c1">#loop through testSet and check for input size</span>
+
             <span class="n">collect</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])):</span> <span class="c1">#retrieve the value from test set</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span> <span class="s1">&#39;__len__&#39;</span><span class="p">):</span>
-                <span class="n">collect</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">collect</span> <span class="o">+=</span> <span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])):</span> <span class="c1">#retrieve the value from test set</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span> <span class="s1">&#39;__len__&#39;</span><span class="p">):</span>
+                    <span class="n">collect</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">collect</span> <span class="o">+=</span> <span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
 
             <span class="n">inputSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inputSize</span><span class="p">,</span><span class="n">collect</span><span class="p">)</span>
 
+            <span class="n">maxi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">arrtmp</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">maxi</span><span class="p">)</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">value</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">inputSize</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="n">bottom90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
         <span class="n">top10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
@@ -485,7 +499,7 @@
 
 
 <h3 id="SpaceTimeComplex.main.RealTime.bestWorst" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">bestWorst</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">testSet</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">bestWorst</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">testSet</span><span class="p">,</span> <span class="n">loops</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code>
 
 </h3>
 
@@ -610,7 +624,14 @@
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">bestWorst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">testSet</span><span class="p">):</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="k">def</span> <span class="nf">bestWorst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">testSet</span><span class="p">,</span><span class="n">loops</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Args:</span>
@@ -623,25 +644,32 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">inputSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">arrtmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">)):</span> <span class="c1">#loop through every test set</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="c1">#start the timer</span>
-            <span class="n">func</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
-            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,[</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">])</span>
-            <span class="c1">#loop through testSet and check for input size</span>
+            <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="p">):</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="c1">#start the timer</span>
+                <span class="n">func</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+                <span class="n">arrtmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arrtmp</span><span class="p">,[</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">])</span>
+                <span class="c1">#loop through testSet and check for input size</span>
+
             <span class="n">collect</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])):</span> <span class="c1">#retrieve the value from test set</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span> <span class="s1">&#39;__len__&#39;</span><span class="p">):</span>
-                <span class="n">collect</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">collect</span> <span class="o">+=</span> <span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">])):</span> <span class="c1">#retrieve the value from test set</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span> <span class="s1">&#39;__len__&#39;</span><span class="p">):</span>
+                    <span class="n">collect</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">collect</span> <span class="o">+=</span> <span class="n">testSet</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
 
             <span class="n">inputSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inputSize</span><span class="p">,</span><span class="n">collect</span><span class="p">)</span>
 
+            <span class="n">maxi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">arrtmp</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">maxi</span><span class="p">)</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">value</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">inputSize</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="n">bottom90</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
         <span class="n">top10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
@@ -751,14 +779,7 @@
 
           <details class="quote">
             <summary>Source code in <code>SpaceTimeComplex\main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
 <span class="normal"> 96</span>
 <span class="normal"> 97</span>
 <span class="normal"> 98</span>
@@ -818,7 +839,14 @@
 <span class="normal">152</span>
 <span class="normal">153</span>
 <span class="normal">154</span>
-<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">complexGuess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">testSet</span><span class="p">):</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">complexGuess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">testSet</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 <span class="sd">        func (Function): Enter the callable name of a function</span>
@@ -971,14 +999,7 @@
 
           <details class="quote">
             <summary>Source code in <code>SpaceTimeComplex\main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">176</span>
 <span class="normal">177</span>
 <span class="normal">178</span>
 <span class="normal">179</span>
@@ -998,7 +1019,14 @@
 <span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
-<span class="normal">196</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generateTestSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">amount</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">size2</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generateTestSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">amount</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">size2</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Args:</span>
 <span class="sd">        amount (int): defines how many testing sets</span>
