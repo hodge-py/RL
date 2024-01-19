@@ -77,12 +77,10 @@ class RealTime():
         bottom90 = np.mean(arr)
         top10 = np.mean(arrlow)
         #write outputs to files eventually
-        mean_log, mean_const = self.polyFunc(np.log(x),np.log(arrmean),1)
-        bottom90_log, bottom90_const = self.polyFunc(np.log(x),np.log(arr),1)
-        top10_log, top10_const = self.polyFunc(np.log(x),np.log(arrlow),1)
+        # find the standard deviation and add it to the mean. Mean in this case being the N^value found from the logarithmic fit
+        log_fit, slopeCons = self.polyFunc(x,y,1)
+        print((((mean-top10)/top10)+1))
 
-
-        m, b = np.polyfit(x, y, 1)
         fig, ax = plt.subplots()
         ax.grid(zorder=-1.0)
         ax.scatter(x,y=arrmean, zorder=4)
