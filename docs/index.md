@@ -1,5 +1,5 @@
-# Welcome to MkDocs
+# Welcome to TimeComplex
 
 ## Summary
 
-Python package to handle time and space complexity by empirical running algorithms.
+Python package to handle time complexity by empirical running algorithms. Go to docs to read about different functions

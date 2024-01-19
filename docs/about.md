@@ -1,6 +1,6 @@
-# About timeandSpace
+# About TimeComplex
 
-timeAndSpace is tool used to measure time and space complexity. This is done by running an algorithm with different input sizes to determine run and space requirements
+TimeComplex is tool used to measure time complexity. This is done by running an algorithm with different input sizes to determine time requirements
 
 ## License
 

@@ -27,7 +27,7 @@ class RealTime():
 
     """
 
-    def bestWorst(self,func,testSet):
+    def bestWorst(self,func,testSet,loops=10):
         """
         
         Args:
@@ -39,47 +39,59 @@ class RealTime():
             Pyplot: Shows a plot with the worst, best and average run times
             
         """
-        
 
+        arr = np.array([])
+        inputSize = np.array([])
+        arrtmp = np.array([])
+        arrlow = np.array([])
+        arrmean = np.array([])
+        
         for x in range(0,len(testSet)): #loop through every test set
-            start = timeit.default_timer() #start the timer
-            func(testSet[x])
-            end = timeit.default_timer()
-            arr = np.append(arr,[end-start])
-            #loop through testSet and check for input size
+            for z in range(loops):
+                start = timeit.default_timer() #start the timer
+                func(testSet[x])
+                end = timeit.default_timer()
+                arrtmp = np.append(arrtmp,(end-start))
+                print(arrtmp)
+                #loop through testSet and check for input size
+                
             collect = 0
-        for y in range(len(testSet[x])): #retrieve the value from test set
-            if hasattr(testSet[x][y], '__len__'):
-                collect += len(testSet[x][y])
-            else:
-                collect += testSet[x][y]
+            for y in range(len(testSet[x])): #retrieve the value from test set
+                if hasattr(testSet[x][y], '__len__'):
+                    collect += len(testSet[x][y])
+                else:
+                    collect += testSet[x][y]
 
             inputSize = np.append(inputSize,collect)
-
+            maxi = np.max(arrtmp)
+            lower = np.min(arrtmp)
+            meaner = np.mean(arrtmp)
+            arr = np.append(arr,maxi)
+            arrlow = np.append(arrlow,lower)
+            arrmean = np.append(arrmean,meaner)
+            arrtmp = np.array([])
         
-        x = np.arange(1,value+1)
-        y = np.asarray(result) * 1000
-        mean = np.mean(y)
-        bottom90 = np.percentile(y,90)
-        top10 = np.percentile(y,10)
+        x = inputSize
+        y = np.asarray(arr) * 1000
+        mean = meaner
+        bottom90 = np.mean(arr)
+        top10 = np.mean(arrlow)
         #write outputs to files eventually
-        print(
-            f"""
-Mean is {round(mean,3)} ms
-Bottom 90 is {round(bottom90,3)} ms
-top 10 is {round(top10,3)} ms
-            """ 
-              )
+        mean_log, mean_const = self.polyFunc(np.log(x),np.log(arrmean),1)
+        bottom90_log, bottom90_const = self.polyFunc(np.log(x),np.log(arr),1)
+        top10_log, top10_const = self.polyFunc(np.log(x),np.log(arrlow),1)
+
 
         m, b = np.polyfit(x, y, 1)
-        plt.scatter(x,y,zorder=0)
-        plt.plot(x,m*x+b,zorder=3,c='green')
-        plt.grid(zorder=-1.0)
-        plt.axhline(y=mean, zorder=4)
-        plt.axhline(y=bottom90,c='red')
-        plt.axhline(y=top10,c='purple')
-        plt.xlabel("Runs")
-        plt.ylabel("Time (ms)")
+        fig, ax = plt.subplots()
+        ax.grid(zorder=-1.0)
+        ax.scatter(x,y=arrmean, zorder=4)
+        ax.scatter(x,y=arr,c='red')
+        ax.scatter(x,y=arrlow,c='purple')
+        ax.axhline(y=mean)
+        ax.axhline(y=bottom90)
+        ax.axhline(y=top10)
+        ax.set(xlabel="Inputs",ylabel='Time (ms)')
         plt.show()
 
 
@@ -98,12 +110,7 @@ top 10 is {round(top10,3)} ms
         
         Example: 
 
-            testSet = {
-                0: [[0,3,2,3]], 
-                1: [[0,3,2,4,3,2,2]], 
-                2: [[343,23,4,234,3]],
-                ... 
-                }
+            testSet = [[1,2,4,53], [33,34,52,2,5], [234,2], ... ]
 
         """
 
@@ -182,12 +189,7 @@ top 10 is {round(top10,3)} ms
 
         Example:
 
-            testSet = {
-                0: [[0,3,2,3]],
-                1: [[0,3,2,4,3,2,2]],
-                2: [[343,23,4,234,3]]
-                ...
-            }
+            testSet = [[1,2,4,53], [33,34,52,2,5], [234,2], ... ]
 
 
         """

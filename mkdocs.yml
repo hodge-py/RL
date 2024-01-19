@@ -1,4 +1,4 @@
-site_name: timeAndSpace
+site_name: TimeComplex
 
 plugins:
   - mkdocstrings
