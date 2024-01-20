@@ -68,18 +68,20 @@ class RealTime():
         
         x = inputSize
         y = np.multiply(arr,1000)
-        print(y)
+        y = np.log(y) # logging the y variable should put it on the same scale as the other values
         std = np.std(y)
         print(2*std)
         # write outputs to files eventually
         # find the standard deviation and add it to the mean. Mean in this case being the N^value found from the logarithmic fit
         # used the original array to find the mean and then apply std deviation.
         u, counts = np.unique(y,return_counts=True)
+        mean = np.mean(y)
 
         fig, ax = plt.subplots()
         ax.grid(zorder=-1.0)
         ax.hist(y,bins=50)
-
+        ax.axvline(x=(mean + 2*std))
+        ax.axvline(x=(mean + -2*std))
         plt.show()
 
 
