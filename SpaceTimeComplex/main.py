@@ -44,7 +44,7 @@ class RealTime():
         inputSize = np.array([])
         arrtmp = np.array([])
 
-        testChoice = random.randint(0,len(testSet))
+        testChoice = random.randint(0,len(testSet)-1)
         
         for y in range(loop):
             start = timeit.default_timer() #start the timer
@@ -80,7 +80,7 @@ class RealTime():
 
         fig, ax = plt.subplots()
         ax.grid(zorder=-1.0)
-        ax.hist(y,bins=20)
+        ax.hist(y,bins=5,range=((mean + -2*std),(mean + 2*std)))
         ax.axvline(x=(mean + 2*std))
         ax.axvline(x=(mean + -2*std))
         plt.show()
@@ -161,7 +161,7 @@ class RealTime():
         plt.show()
         gc.enable()
 
-        
+        return log_fit, slopeCons
 
     
     def polyFunc(self,x,y,degree):
