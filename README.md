@@ -63,11 +63,17 @@ ratio = real.bestWorst(testone,testSet)
 
 ```
 
-## Example of the non-log function graphed. Green $O(n^{.94})$ and red $O(n^{2.7})$
+![figureex](https://github.com/hodge-py/TimeComplex/assets/105604814/a59a49ab-1aa3-48d6-80e3-fe3d68ef33f5)
 
-![grapher](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/0c784075-e11a-4c7c-9721-7e534353cba9)
+![firgurehist](https://github.com/hodge-py/TimeComplex/assets/105604814/48ac6f25-91ac-4163-adac-5cfe8f8c710c)
 
-This is in respects to time (ms). When accounting for just the growth of input, the inputs will increase in a linear and polynomial fashion.
+![finaloutput](https://github.com/hodge-py/TimeComplex/assets/105604814/97450568-cd8f-4a6d-9c6c-d666dfa6c9c8)
+
+## Example of the non-log function graphed using the dervived power. $O(n^{2.8})$
+
+![grapher](https://github.com/hodge-py/TimeComplex/assets/105604814/85382aba-9c96-4c2f-a422-6a87cb1b0287)
+
+This is in respects to time (ms). When accounting for just the growth of input, the input will grow in a polynomial fashion.
 
 ## Jupyter Lab
 
