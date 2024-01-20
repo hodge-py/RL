@@ -69,11 +69,19 @@ ratio = real.bestWorst(testone,testSet)
 
 ![finaloutput](https://github.com/hodge-py/TimeComplex/assets/105604814/97450568-cd8f-4a6d-9c6c-d666dfa6c9c8)
 
-## Example of the non-log function graphed using the dervived power. $O(n^{2.8})$
+## Example of the non-log function graphed using the derived power. $O(n^{2.8})$
 
 ![grapher](https://github.com/hodge-py/TimeComplex/assets/105604814/85382aba-9c96-4c2f-a422-6a87cb1b0287)
 
 This is in respects to time (ms). When accounting for just the growth of input, the input will grow in a polynomial fashion.
+
+## Math behind the calculations
+
+A simplistic understanding how the time complexity is extracted stems from the log power rule.
+
+Power Rule:
+
+$log(x^k) = k \cdot log(x)$
 
 ## Jupyter Lab
 
