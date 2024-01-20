@@ -43,28 +43,29 @@ class RealTime():
         arr = np.array([])
         inputSize = np.array([])
         arrtmp = np.array([])
+
+        testChoice = random.randint(0,len(testSet))
         
-        for x in range(0,len(testSet)): #loop through every test set
-            for y in range(loop):
-                start = timeit.default_timer() #start the timer
-                func(testSet[x])
-                end = timeit.default_timer()
-                arrtmp = np.append(arrtmp,(end-start))
+        for y in range(loop):
+            start = timeit.default_timer() #start the timer
+            func(testSet[testChoice])
+            end = timeit.default_timer()
+            arrtmp = np.append(arrtmp,(end-start))
 
-            #loop through testSet and check for input size
-                
-            collect = 0
-            for y in range(len(testSet[x])): #retrieve the value from test set
-                if hasattr(testSet[x][y], '__len__'):
-                    collect += len(testSet[x][y])
-                else:
-                    collect += testSet[x][y]
+        #loop through testSet and check for input size
+            
+        collect = 0
+        for y in range(len(testSet[testChoice])): #retrieve the value from test set
+            if hasattr(testSet[testChoice][y], '__len__'):
+                collect += len(testSet[testChoice][y])
+            else:
+                collect += testSet[testChoice][y]
 
-            inputSize = np.append(inputSize,collect)
-            arr = np.append(arr,arrtmp)
-            arrtmp = np.array([])
+        inputSize = np.append(inputSize,collect)
+        arr = np.append(arr,arrtmp)
+        arrtmp = np.array([])
 
-            break
+
         
         x = inputSize
         y = np.multiply(arr,1000)
@@ -84,6 +85,7 @@ class RealTime():
         ax.axvline(x=(mean + -2*std))
         plt.show()
 
+        return (2*std)
 
 
     

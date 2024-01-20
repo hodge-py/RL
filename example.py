@@ -52,6 +52,6 @@ testSet1 = [[4,"stnr=gwege"], [12,"sagsdgg"], [3,"esfsfsseafesfsefsef"], [45,"st
 
 #real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
 
-real.bestWorst(testone,testSet)
+ratio = real.bestWorst(testone,testSet)
 
 
