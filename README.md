@@ -71,7 +71,7 @@ ratio = real.bestWorst(testone,testSet)
 
 ## Example of the non-log function graphed using the derived power. $O(n^{2.8})$
 
-![grapher](https://github.com/hodge-py/TimeComplex/assets/105604814/85382aba-9c96-4c2f-a422-6a87cb1b0287)
+![grapher](https://github.com/hodge-py/TimeComplex/assets/105604814/028554a6-36c5-431f-b1ba-58bdd0a23223)
 
 This is in respects to time (ms). When accounting for just the growth of input, the input will grow in a polynomial fashion.
 
