@@ -8,14 +8,9 @@ PYPI:
 
 ```python
 
-import SpaceTimeComplex
-
-def looper(today,stringer):
-    for x in range(today):
+def looper2(n):
+    for x in range(n):
         print(x)
-    
-    for y in stringer:
-        print(y)
 
 def testone(n):
     for x in range(len(n)):
@@ -25,21 +20,48 @@ def testone(n):
               one = x
               three = z
 
+def looper(today,stringer):
+    for x in range(today):
+        print(x)
+    
+    for y in stringer:
+        print(y)
+
+
+
+def logfunc(n):
+    for x in range(0,len(n[0]),20):
+        print(x) 
+
+
+def binary_search(array,target):
+  low = 0
+  high = len(array) - 1
+  while low <= high:
+    mid = (low + high) // 2 # integer division
+    element = array[mid]
+    if element == target:
+      return mid
+    elif element < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+  return -1
+
 
 real = SpaceTimeComplex.RealTime() # Create the class
+#x.realTimeComplex(stmt="looper(10)",value=10)
 
-testSet = real.generateTestSet() #generate a test set
+testSet = real.generateTestSet(size2=100) #generate a test set
 
-testSet1 = [[4,"stnr=gwege"], [12,"sagsdgg"], [3,"esfsfsseafesfsefsef"], [45,"stnrefgseege"], [17,"sagwetjtwfwe"], [34,"esfsfssem"],[41,"stn"], [53,"sakhhksdgg"], [24,"esjfjkkfsefsef"], [70,"stnwete"], [7,"sagwefwewsdfsdffwe"], ] 
-# format of array. 2d array with each test set inside. You can make your own or just generate one with generateTestSet(). Each inner array is the postional arguements for the inserted argument.
+testSet1 = [[4,"stnr=gwege"], [12,"sagsdgg"], [3,"esfsfsseafesfsefsef"], [45,"stnrefgseege"], [17,"sagwetjtwfwe"], [34,"esfsfssem"],[41,"stn"], [53,"sakhhksdgg"], [24,"esjfjkkfsefsef"], [70,"stnwete"], [7,"sagwefwewsdfsdffwe"] ] 
+# format of array. 2d array with each test set inside. You can make your own or just generate one with generateTestSet()
 
-real.complexGuess(looper,testSet1) #guess the complexity of a function. Returns the guess and a plot
+logFunction, SlopeConst = real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
+
+ratio = real.bestWorst(testone,testSet)
 
 ```
-
-![Figure_1](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/bfe0246f-ac30-418b-b171-48bb1e3093ce)
-
-![Screenshot 2024-01-16 010936](https://github.com/hodge-py/SpaceTimeComplex/assets/105604814/0521a2d7-9254-47f2-8b6f-d408038e33b1)
 
 ## Example of the non-log function graphed. Green $O(n^{.94})$ and red $O(n^{2.7})$
 

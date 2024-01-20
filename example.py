@@ -50,7 +50,7 @@ testSet = real.generateTestSet(size2=100) #generate a test set
 testSet1 = [[4,"stnr=gwege"], [12,"sagsdgg"], [3,"esfsfsseafesfsefsef"], [45,"stnrefgseege"], [17,"sagwetjtwfwe"], [34,"esfsfssem"],[41,"stn"], [53,"sakhhksdgg"], [24,"esjfjkkfsefsef"], [70,"stnwete"], [7,"sagwefwewsdfsdffwe"] ] 
 # format of array. 2d array with each test set inside. You can make your own or just generate one with generateTestSet()
 
-#real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
+logFunction, SlopeConst = real.complexGuess(testone,testSet) #guess the complexity of a function. Returns the guess and a plot
 
 ratio = real.bestWorst(testone,testSet)
 
