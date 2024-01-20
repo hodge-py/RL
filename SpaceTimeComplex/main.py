@@ -68,7 +68,7 @@ class RealTime():
         
         x = inputSize
         y = np.multiply(arr,1000)
-        y = np.log(y) # logging the y variable should put it on the same scale as the other values
+        y = np.log(y) # logging the y variable should put it on the same scale as the other values. Seems to fit in confidence interval this way
         std = np.std(y)
         print(2*std)
         # write outputs to files eventually
@@ -79,7 +79,7 @@ class RealTime():
 
         fig, ax = plt.subplots()
         ax.grid(zorder=-1.0)
-        ax.hist(y,bins=50)
+        ax.hist(y,bins=20)
         ax.axvline(x=(mean + 2*std))
         ax.axvline(x=(mean + -2*std))
         plt.show()
