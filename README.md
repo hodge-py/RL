@@ -85,7 +85,7 @@ $log(n^k) = k \cdot log(n)$
 
 After apply a log to both n and y variables, a linear regression is applied.
 
-$y = time, n = input size, b = constant 
+$y = time, n = input size, b = constant$
 
 $log(y) = log(n^k) + b$
 
