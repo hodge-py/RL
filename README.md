@@ -81,7 +81,21 @@ A simplistic understanding how the time complexity is extracted stems from the l
 
 Power Rule:
 
-$log(x^k) = k \cdot log(x)$
+$log(n^k) = k \cdot log(n)$
+
+After apply a log to both n and y variables, a linear regression is applied.
+
+$y = time, n = input size, b = constant 
+
+$log(y) = log(n^k) + b$
+
+apply the power rule
+
+$log(y) = k \cdot log(n) + b$
+
+Everything can be ignored except for k. k determines the slope of line and tells us the time complexity.
+
+$time complexity = N^k$
 
 ## Jupyter Lab
 
