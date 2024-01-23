@@ -8,6 +8,8 @@ PYPI:
 
 ```python
 
+import SpaceTimeComplex
+
 def looper2(n):
     for x in range(n):
         print(x)
