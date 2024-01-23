@@ -8,7 +8,7 @@ PYPI:
 
 ```python
 
-import SpaceTimeComplex
+import TimeComplex
 
 def looper2(n):
     for x in range(n):
@@ -51,7 +51,7 @@ def binary_search(array,target):
   return -1
 
 
-real = SpaceTimeComplex.RealTime() # Create the class
+real = TimeComplex.RealTime() # Create the class
 #x.realTimeComplex(stmt="looper(10)",value=10)
 
 testSet = real.generateTestSet(size2=100) #generate a test set
